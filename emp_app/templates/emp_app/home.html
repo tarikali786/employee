@@ -1,0 +1,53 @@
+{% extends 'main.html' %} {% block content %}
+<style>
+  .home-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+  }
+</style>
+<a href="{% url 'home' %}">Return</a>
+<h1>Employee Management System</h1>
+<form method="GET" action="{% url 'home' %}">
+  <input type="text" name="q" placeholder="Search Employew..." />
+</form>
+<hr />
+<div class="home-container">
+  <div>
+    <h2>Total Employee</h2>
+    <hr />
+    <a href="{% url 'home' %}">All</a>
+    {% for emp in emps %}
+    <div>
+      <a href="{% url 'home' %}?q={{emp.name}}">{{emp.name}}</a>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div>
+    <h3>
+      <a href="{% url 'createEmp' %}">Create Employee</a> &nbsp;
+      <a href="{% url 'createDep' %}">Create Department</a>&nbsp;
+      <a href="{% url 'createRole' %}">Create Role</a>&nbsp;
+    </h3>
+    {% for emp in emps %}
+    <div>
+      <a href="{% url 'update' emp.id %}">Update</a>
+      <a href="{% url 'delete' emp.id %}">Delete</a> <br />
+
+      Name: {{emp.name}} <br />
+      Age: {{emp.age}}<br />
+      Email Id: {{emp.email}}<br />
+      Mobile No: {{emp.name}}<br />
+      Address: {{emp.address}}<br />
+      Department: {{emp.department}} <br />
+      Salary: {{emp.salary}}<br />
+      Bonus: {{emp.bonus}}<br />
+      Role: {{emp.role}}<br />
+      Hire Date: {{emp.hire_date}}<br />
+      <!-- Image Feild:{{emp.image}} -->
+      <hr />
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
